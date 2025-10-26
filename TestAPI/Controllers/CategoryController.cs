@@ -30,5 +30,37 @@ namespace TestAPI.Controllers
         }
 
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateCategory(Category category)
+        {
+            var c = _categoryRepo.GetById(category.Id);
+            if(c==null)
+            {
+                return BadRequest();
+            }
+           c.Name = category.Name;
+            _categoryRepo.Save();
+            return Ok(c);
+
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var c = _categoryRepo.GetById(id);
+            if (c == null)
+            {
+                return BadRequest();
+            }
+            _categoryRepo.Delete(id);
+            _categoryRepo.Save();
+            return Ok(c);
+
+
+        }
+
+
     }
+
+
 }

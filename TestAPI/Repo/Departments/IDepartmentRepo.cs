@@ -1,4 +1,5 @@
-﻿using TestAPI.Models;
+﻿
+using TestAPI.Models;
 
 namespace TestAPI.Repo.departments
 {

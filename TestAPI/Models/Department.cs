@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using Microsoft.EntityFrameworkCore;
 namespace TestAPI.Models
 {
+    [Index(nameof(Name), IsUnique = true)]
     public class Department
     {
         [Key]
-        public int Id { get; set; }
+        public int DeptID { get; set; }
         [Required]
-        [MaxLength(30)]
-        public string Name { get; set; } = string.Empty;
-        [Required]
-        [MaxLength(130)]
-        public string Description { get; set; }
+        [StringLength(100)]
+        //unique
+     
+        public string Name { get; set; }
+        public string Location { get; set; }
     }
 }

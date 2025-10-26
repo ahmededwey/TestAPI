@@ -2,72 +2,78 @@
 using TestAPI.Models;
 using TestAPI.Repo.departments;
 
-
 namespace TestAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private readonly IDepartmentRepo _departmentRepo;
-
-        public DepartmentController(IDepartmentRepo departmentRepo)
+        private readonly IDepartmentRepo _DepartmentRepo;
+        public DepartmentController(IDepartmentRepo DepartmentRepo)
         {
-            _departmentRepo = departmentRepo;
+            _DepartmentRepo = DepartmentRepo;
         }
 
-        // GET: api/Department
         [HttpGet]
         public async Task<IActionResult> GetAllDepartments()
         {
-            var departments = _departmentRepo.GetAll();
-            return Ok(departments);
+            var categories = _DepartmentRepo.GetAll();
+            return Ok(categories);
         }
+      
 
-        // GET: api/Department/{id}
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetDepartmentById(int id)
-        {
-            var department = _departmentRepo.GetById(id);
-            if (department == null)
-                return NotFound($"Department with ID {id} not found.");
 
-            return Ok(department);
-        }
-
-        // POST: api/Department
         [HttpPost]
-        public async Task<IActionResult> AddDepartment(Department d)
+        public async Task<IActionResult> AddDepartment(Department D)
         {
-            if (d == null)
-                return BadRequest("Invalid department data.");
-
-            _departmentRepo.Add(d);
-            return Ok(d);
+            _DepartmentRepo.Add(D);
+            return Ok(D);
         }
 
-        // PUT: api/Department
+
         [HttpPut]
-        public async Task<IActionResult> EditDepartment(Department d)
+        public async Task<IActionResult> UpdateDepartment(Department department)
         {
-            var existing = _departmentRepo.GetById(d.Id);
-            if (existing == null)
-                return NotFound($"Department with ID {d.Id} not found.");
+            var D = _DepartmentRepo.GetById(department.DeptID);
+            if (D == null)
+            {
+                return BadRequest();
+            }
+            D.Name = department.Name;
+            _DepartmentRepo.Save();
+            return Ok(D);
 
-            _departmentRepo.Edit(d);
-            return Ok(d);
         }
 
-        // DELETE: api/Department/{id}
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteDepartment(int id)
         {
-            var existing = _departmentRepo.GetById(id);
-            if (existing == null)
-                return NotFound($"Department with ID {id} not found.");
+            var D = _DepartmentRepo.GetById(id);
+            if (D == null)
+            {
+                return BadRequest();
+            }
+            _DepartmentRepo.Delete(id);
+            _DepartmentRepo.Save();
+            return Ok(D);
 
-            _departmentRepo.Delete(id);
-            return Ok($"Department with ID {id} deleted successfully.");
+
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAllDepartments(int id)
+        {
+            var D = _DepartmentRepo.GetById(id);
+            if (D == null)
+            {
+                return BadRequest();
+            }
+     
+            return Ok(D);
+
+
+        }
+
+
     }
 }

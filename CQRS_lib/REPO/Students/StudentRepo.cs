@@ -1,10 +1,12 @@
-﻿
+﻿using CQRS_lib.DATA.Models;
 using Microsoft.EntityFrameworkCore;
-using TestApI.Models;
-using TestAPI.Models;
-using TestAPI.Repo;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace APIITI.Repo.Students
+namespace CQRS_lib.REPO.Students
 {
     public class StudentRepo : IStudentRepo
     {

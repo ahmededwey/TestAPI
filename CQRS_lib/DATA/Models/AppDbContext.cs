@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TestAPI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TestApI.Models
-
+namespace CQRS_lib.DATA.Models
 {
     public class AppDbContext : DbContext
     {
@@ -11,10 +14,10 @@ namespace TestApI.Models
         {
 
         }
-        public DbSet<Category> Categories { get; set; }
+      
         public DbSet<Department> departments { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<Item> Items { get; set; }
+      
 
 
     }

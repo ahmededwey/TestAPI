@@ -1,10 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using TestApI.Models;
-using TestAPI.Models;
+﻿using CQRS_lib.DATA.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace TestAPI.Repo.departments
+namespace CQRS_lib.REPO.Departments
 {
     public class DepartmentRepo : IDepartmentRepo
     {

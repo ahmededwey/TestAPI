@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TestAPI.Models;
-using TestAPI.Repo.departments;
+﻿using CQRS_lib.DATA.Models;
+using CQRS_lib.REPO.Departments;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace TestAPI.Controllers
 {
@@ -26,6 +27,10 @@ namespace TestAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDepartment(Department D)
         {
+            if (D == null)
+                return BadRequest("Department data is required.");
+            if(D.OpenDate >= DateTime.Now)
+                return BadRequest("OpenDate must be in the past.");
             _DepartmentRepo.Add(D);
             return Ok(D);
         }
@@ -62,7 +67,7 @@ namespace TestAPI.Controllers
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAllDepartments(int id)
-        {
+          {
             var D = _DepartmentRepo.GetById(id);
             if (D == null)
             {

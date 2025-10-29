@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-namespace TestAPI.Models
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace CQRS_lib.DATA.Models
 {
     [Index(nameof(Name), IsUnique = true)]
     public class Department
@@ -10,8 +11,10 @@ namespace TestAPI.Models
         [Required]
         [StringLength(100)]
         //unique
-     
+
         public string Name { get; set; }
         public string Location { get; set; }
+        [Required]
+        public DateTime OpenDate { get; set; }
     }
 }
